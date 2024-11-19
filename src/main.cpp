@@ -27,5 +27,12 @@ int main() {
 
     avion3.afiseazaInformatii();
 
+    // Copy assignment operator
+    avion2 = avion1;
+
+    // Move assignment operator
+    avion3 = Avion("Piper PA-28", 4, 230, "Air Club");
+    avion3.afiseazaInformatii();
+
     return 0; 
 }

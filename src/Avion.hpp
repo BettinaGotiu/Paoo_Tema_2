@@ -6,7 +6,10 @@
 
 class Avion {
 public:
-    // Constructor 
+    // Constructor implicit
+    Avion();
+
+    // Constructor general
     Avion(const std::string& nume, int capacitate_locuri, int viteza_maxima, const std::string& proprietar);
     
     // Copy constructor
@@ -15,16 +18,22 @@ public:
     // Move constructor
     Avion(Avion&& other) noexcept;
 
+    // Copy assignment operator
+    Avion& operator=(const Avion& other);
+
+    // Move assignment operator
+    Avion& operator=(Avion&& other) noexcept;
+
     // Destructor
     ~Avion();
 
     void afiseazaInformatii() const;
 
 private:
-    std::string nume = " ";          // Initializare implicita
-    int capacitate_locuri = 0;         // Initializare implicita
-    int viteza_maxima = 0;             // Initializare implicita
-    std::string proprietar = " ";    // Initializare implicita
+    std::string nume = " ";          
+    int capacitate_locuri = 0;       
+    int viteza_maxima = 0;           
+    std::string proprietar = " ";    
 };
 
-#endif 
+#endif

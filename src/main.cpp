@@ -18,9 +18,7 @@ int main() {
     avion1.afiseazaInformatii();
 
     // Crearea unui nou avion folosind copy constructorul
-    Avion avion2 = avion1;
-
-    avion2.afiseazaInformatii();
+    //Avion avion2 = avion1;  // eroare de compilare: 'Avion::Avion': cannot access private member declared in class 'Avion'
 
     // Crearea unui nou avion folosind move constructorul
     Avion avion3 = fabricaAvion("Cirrus SR20", 5, 287, "Lufthansa");
@@ -28,7 +26,7 @@ int main() {
     avion3.afiseazaInformatii();
 
     // Copy assignment operator
-    avion2 = avion1;
+    // avion2 = avion1;  // eroare de compilare
 
     // Move assignment operator
     avion3 = Avion("Piper PA-28", 4, 230, "Air Club");

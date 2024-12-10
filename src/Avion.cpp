@@ -1,49 +1,96 @@
-#include "Avion.hpp"
+#include "avion.hpp"
+
+// Clasa Avion
 
 // Constructor implicit
 Avion::Avion()
     : nume("Necunoscut"), capacitate_locuri(0), viteza_maxima(0), proprietar("Necunoscut") {
-    std::cout << "Constructor implicit apelat pentru avionul: " << nume << std::endl;
+    std::cout << "Constructor implicit Avion apelat\n";
 }
 
 // Constructor general
 Avion::Avion(const std::string& nume, int capacitate_locuri, int viteza_maxima, const std::string& proprietar)
     : nume(nume), capacitate_locuri(capacitate_locuri), viteza_maxima(viteza_maxima), proprietar(proprietar) {
-    std::cout << "Constructor general apelat pentru avionul: " << this->nume << std::endl;
+    std::cout << "Constructor general Avion apelat\n";
 }
 
-// Move constructor (Item 11: Implementare move constructor)
-Avion::Avion(Avion&& other) noexcept
-    : nume(std::move(other.nume)), capacitate_locuri(other.capacitate_locuri),
-      viteza_maxima(other.viteza_maxima), proprietar(std::move(other.proprietar)) {
-    std::cout << "Move constructor apelat pentru avionul: " << nume << std::endl;
+// Copy constructor
+Avion::Avion(const Avion& other) {
+    init(other); // Apelam functia auxiliara
+    std::cout << "Copy constructor Avion apelat\n";
 }
 
-// Move assignment operator (Item 10 si Item 11: Returneaza *this si trateaza self-assignment)
-Avion& Avion::operator=(Avion&& other) noexcept {
-    if (this == &other) { // Item 11: Verificare self-assignment
-        std::cout << "Self-assignment detectat pentru avionul: " << nume << std::endl;
+// Copy assignment operator
+Avion& Avion::operator=(const Avion& other) {
+    if (this == &other) {
+        std::cout << "Self-assignment detectat Avion\n";
         return *this;
     }
 
-    // Mutam resursele din `other` in obiectul curent
-    nume = std::move(other.nume);
-    capacitate_locuri = other.capacitate_locuri;
-    viteza_maxima = other.viteza_maxima;
-    proprietar = std::move(other.proprietar);
-
-    std::cout << "Move assignment operator apelat pentru avionul: " << nume << std::endl;
-
-    return *this; // Item 10: Returneaza *this pentru a permite lanturi de atribuire
+    init(other); // Copierea datelor
+    std::cout << "Copy assignment operator Avion apelat\n";
+    return *this;
 }
 
 // Destructor
 Avion::~Avion() {
-    std::cout << "Destructor apelat pentru avionul: " << nume << std::endl;
+    std::cout << "Destructor Avion apelat\n";
 }
 
-// Metoda de afisare a informatiilor
+// Functie auxiliara pentru copiere
+void Avion::init(const Avion& other) {
+    nume = other.nume;
+    capacitate_locuri = other.capacitate_locuri;
+    viteza_maxima = other.viteza_maxima;
+    proprietar = other.proprietar;
+}
+
+// Metoda de afisare
 void Avion::afiseazaInformatii() const {
-    std::cout << "Avion: " << nume << ", Capacitate locuri: " << capacitate_locuri
-              << ", Viteza maxima: " << viteza_maxima << " km/h, Proprietar: " << proprietar << std::endl;
+    std::cout << "Avion: " << nume << ", Capacitate: " << capacitate_locuri
+              << ", Viteza: " << viteza_maxima << " km/h, Proprietar: " << proprietar << "\n";
+}
+
+// Clasa AvionSpecial 
+// Constructor implicit
+AvionSpecial::AvionSpecial()
+    : Avion(), armament(0) {
+    std::cout << "Constructor implicit AvionSpecial apelat\n";
+}
+
+// Constructor general
+AvionSpecial::AvionSpecial(const std::string& nume, int capacitate_locuri, int viteza_maxima,
+                           const std::string& proprietar, int armament)
+    : Avion(nume, capacitate_locuri, viteza_maxima, proprietar), armament(armament) {
+    std::cout << "Constructor general AvionSpecial apelat\n";
+}
+
+// Copy constructor
+AvionSpecial::AvionSpecial(const AvionSpecial& other)
+    : Avion(other), armament(other.armament) { // Copiem partea clasei de baza
+    std::cout << "Copy constructor AvionSpecial apelat\n";
+}
+
+// Copy assignment operator
+AvionSpecial& AvionSpecial::operator=(const AvionSpecial& other) {
+    if (this == &other) {
+        std::cout << "Self-assignment detectat AvionSpecial\n";
+        return *this;
+    }
+
+    Avion::operator=(other); // Copierea partii din clasa de baza
+    armament = other.armament; // Copierea membrului local
+    std::cout << "Copy assignment operator AvionSpecial apelat\n";
+    return *this;
+}
+
+// Destructor
+AvionSpecial::~AvionSpecial() {
+    std::cout << "Destructor AvionSpecial apelat\n";
+}
+
+// Metoda de afisare
+void AvionSpecial::afiseazaInformatii() const {
+    Avion::afiseazaInformatii();
+    std::cout << "Armament: " << armament << "\n";
 }

@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 
+// Clasa de baza Avion
 class Avion {
 public:
     // Constructor implicit
@@ -12,27 +13,52 @@ public:
     // Constructor general
     Avion(const std::string& nume, int capacitate_locuri, int viteza_maxima, const std::string& proprietar);
 
-    // Move constructor
-    Avion(Avion&& other) noexcept; // Item 11: Move constructor implementat
+    // Copy constructor
+    Avion(const Avion& other); // Item 12: Copy constructor
 
-    // Move assignment operator
-    Avion& operator=(Avion&& other) noexcept; // Item 10: Operator= returneaza *this; Item 11: Verificare self-assignment
+    // Copy assignment operator
+    Avion& operator=(const Avion& other); // Item 12: Copy assignment operator
 
     // Destructor
-    ~Avion();
+    virtual ~Avion();
 
     // Metoda de afisare a informatiilor
-    void afiseazaInformatii() const;
+    virtual void afiseazaInformatii() const;
 
-    // Dezactivarea constructorului de copiere si operatorului de copiere
-    Avion(const Avion& other) = delete;
-    Avion& operator=(const Avion& other) = delete;
+protected:
+    void init(const Avion& other); // Functie auxiliara pentru copiere
 
 private:
-    std::string nume = "Necunoscut";
-    int capacitate_locuri = 0;
-    int viteza_maxima = 0;
-    std::string proprietar = "Necunoscut";
+    std::string nume;
+    int capacitate_locuri;
+    int viteza_maxima;
+    std::string proprietar;
+};
+
+// Clasa derivata AvionSpecial
+class AvionSpecial : public Avion {
+public:
+    // Constructor implicit
+    AvionSpecial();
+
+    // Constructor general
+    AvionSpecial(const std::string& nume, int capacitate_locuri, int viteza_maxima, const std::string& proprietar,
+                 int armament);
+
+    // Copy constructor
+    AvionSpecial(const AvionSpecial& other);
+
+    // Copy assignment operator
+    AvionSpecial& operator=(const AvionSpecial& other);
+
+    // Destructor
+    ~AvionSpecial();
+
+    // Metoda de afisare
+    void afiseazaInformatii() const override;
+
+private:
+    int armament; // Numarul de sisteme de armament
 };
 
 #endif // AVION_HPP

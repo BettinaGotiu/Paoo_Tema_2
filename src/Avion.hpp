@@ -13,10 +13,10 @@ public:
     Avion(const std::string& nume, int capacitate_locuri, int viteza_maxima, const std::string& proprietar);
 
     // Move constructor
-    Avion(Avion&& other) noexcept;
+    Avion(Avion&& other) noexcept; // Item 11: Move constructor implementat
 
     // Move assignment operator
-    Avion& operator=(Avion&& other) noexcept;
+    Avion& operator=(Avion&& other) noexcept; // Item 10: Operator= returneaza *this; Item 11: Verificare self-assignment
 
     // Destructor
     ~Avion();

@@ -18,13 +18,14 @@ int main() {
     Avion avion2 = fabricaAvion("Cirrus SR20", 5, 287, "Lufthansa");
     avion2.afiseazaInformatii();
 
-    /* Demonstratie pentru move assignment operator
-    fabricaAvion(...) = Avion(...) funcționează pentru că operatorul de atribuire 
-    returnează o referință către obiectul curent (*this).
-    */
+    /* Demonstratie pentru self-assignment (Item 11: Verificare self-assignment)
+       Avionul este asignat siesi folosind move assignment operator */
+    avion2 = std::move(avion2);
+
+    /* Demonstratie pentru move assignment operator (Item 10: Returnare *this) */
     Avion temp = fabricaAvion("Piper PA-28", 4, 230, "Air Club");
     temp = Avion("Cessna 172", 4, 225, "Private Owner");
-    avion2 = std::move(temp); 
+    avion2 = std::move(temp);
 
     avion2.afiseazaInformatii();
 

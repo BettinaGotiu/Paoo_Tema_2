@@ -5,32 +5,28 @@
 Avion fabricaAvion(std::string nume, int capacitate_locuri, int viteza_maxima, std::string proprietar) {
     Avion nouAvion(nume, capacitate_locuri, viteza_maxima, proprietar);
     return std::move(nouAvion); 
-    /* Folosim move constructor-ul pentru a returna obiectul
-        nu va fi realizată o copie a obiectului, 
-        ci proprietatea acestuia va fi transferată catre apelant
-     */
+    /* Returnam un obiect mutat folosind move constructor-ul
+       pentru a evita copierea */
 }
 
 int main() {
-    //Avion folosind constructorul
+    // Crearea primului avion folosind constructorul general
     Avion avion1("Diamond DA42", 4, 356, "EFA");
-
     avion1.afiseazaInformatii();
 
-    // Crearea unui nou avion folosind copy constructorul
-    //Avion avion2 = avion1;  // eroare de compilare: 'Avion::Avion': cannot access private member declared in class 'Avion'
+    // Crearea unui avion folosind move constructorul
+    Avion avion2 = fabricaAvion("Cirrus SR20", 5, 287, "Lufthansa");
+    avion2.afiseazaInformatii();
 
-    // Crearea unui nou avion folosind move constructorul
-    Avion avion3 = fabricaAvion("Cirrus SR20", 5, 287, "Lufthansa");
+    /* Demonstratie pentru move assignment operator
+    fabricaAvion(...) = Avion(...) funcționează pentru că operatorul de atribuire 
+    returnează o referință către obiectul curent (*this).
+    */
+    Avion temp = fabricaAvion("Piper PA-28", 4, 230, "Air Club");
+    temp = Avion("Cessna 172", 4, 225, "Private Owner");
+    avion2 = std::move(temp); 
 
-    avion3.afiseazaInformatii();
-
-    // Copy assignment operator
-    // avion2 = avion1;  // eroare de compilare
-
-    // Move assignment operator
-    avion3 = Avion("Piper PA-28", 4, 230, "Air Club");
-    avion3.afiseazaInformatii();
+    avion2.afiseazaInformatii();
 
     return 0; 
 }

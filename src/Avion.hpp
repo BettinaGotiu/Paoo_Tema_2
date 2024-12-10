@@ -11,7 +11,7 @@ public:
 
     // Constructor general
     Avion(const std::string& nume, int capacitate_locuri, int viteza_maxima, const std::string& proprietar);
-    
+
     // Move constructor
     Avion(Avion&& other) noexcept;
 
@@ -21,17 +21,18 @@ public:
     // Destructor
     ~Avion();
 
+    // Metoda de afisare a informatiilor
     void afiseazaInformatii() const;
 
-private:
-    std::string nume = " ";          // Initializare implicita
-    int capacitate_locuri = 0;       // Initializare implicita
-    int viteza_maxima = 0;           // Initializare implicita
-    std::string proprietar = " ";    // Initializare implicita
+    // Dezactivarea constructorului de copiere si operatorului de copiere
+    Avion(const Avion& other) = delete;
+    Avion& operator=(const Avion& other) = delete;
 
-    // Declararea constructorului de copiere si operatorului de atribuire de copiere -> private 
-    Avion(const Avion& other);  // Declarare constructor de copiere
-    Avion& operator=(const Avion& other); // Declarare operator de atribuire de copiere 
+private:
+    std::string nume = "Necunoscut";
+    int capacitate_locuri = 0;
+    int viteza_maxima = 0;
+    std::string proprietar = "Necunoscut";
 };
 
-#endif
+#endif // AVION_HPP

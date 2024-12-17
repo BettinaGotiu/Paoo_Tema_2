@@ -19,7 +19,8 @@ Avion::Avion(Avion&& other) noexcept
     std::cout << "Move constructor apelat pentru avionul: " << nume << std::endl;
     /* Item 13: Resource Management - The move constructor transfers ownership of the resources
        (like the strings `nume` and `proprietar`) from `other` to the current object. This prevents
-       unnecessary copies and ensures efficient resource management. */
+       unnecessary copies and ensures efficient resource management. It also leaves the `other` object
+       in a valid but unspecified state, as it no longer owns these resources. */
 }
 
 // Move assignment operator (Item 10 and Item 11: Return *this for chained assignments; Item 11: Self-assignment check)

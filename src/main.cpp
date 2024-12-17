@@ -8,7 +8,8 @@ Avion fabricaAvion(std::string nume, int capacitate_locuri, int viteza_maxima, s
     return std::move(nouAvion); 
     /* Item 13: Resource Management - By using std::move(), we ensure that the returned object
        is not copied but instead transferred to the caller using move semantics, 
-       which avoids unnecessary resource duplication. */
+       which avoids unnecessary resource duplication. This is crucial for resource-managing classes 
+       to optimize performance and resource usage. */
 }
 
 int main() {

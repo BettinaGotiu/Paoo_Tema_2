@@ -6,25 +6,25 @@
 
 class Avion {
 public:
-    // Constructor implicit
+    // Default constructor
     Avion();
 
-    // Constructor general
+    // General constructor
     Avion(const std::string& nume, int capacitate_locuri, int viteza_maxima, const std::string& proprietar);
 
-    // Move constructor
-    Avion(Avion&& other) noexcept; // Item 11: Move constructor implementat
+    // Move constructor (Item 11: Implemented move constructor)
+    Avion(Avion&& other) noexcept;
 
-    // Move assignment operator
-    Avion& operator=(Avion&& other) noexcept; // Item 10: Operator= returneaza *this; Item 11: Verificare self-assignment
+    // Move assignment operator (Item 10: Return *this for chained assignments; Item 11: Self-assignment check)
+    Avion& operator=(Avion&& other) noexcept;
 
     // Destructor
     ~Avion();
 
-    // Metoda de afisare a informatiilor
+    // Method to display information
     void afiseazaInformatii() const;
 
-    // Dezactivarea constructorului de copiere si operatorului de copiere
+    // Disabling copy constructor and copy assignment operator
     Avion(const Avion& other) = delete;
     Avion& operator=(const Avion& other) = delete;
 
